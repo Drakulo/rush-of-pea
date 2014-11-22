@@ -18,9 +18,14 @@ public class InputManager : MonoBehaviour
     private string _debug = "";
     private Vector2 _debugVector = Vector2.zero;
 
+    private bool isSwipe = false;
+    private float fingerStartTime = 0.0f;
+    private float maxSwipeTime = 0.5f;
+    private float minSwipeDist = 50.0f;
+
     void Update()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_STANDALONE
         if(Input.GetMouseButton(0) && !_waitForRelease)
         {
             if (!_wasTouching)
@@ -43,19 +48,64 @@ public class InputManager : MonoBehaviour
             _waitForRelease = false;
         }
 #elif UNITY_ANDROID
-        if (Input.touchCount > 0 && !_waitForRelease)
+        if(Input.touchCount > 0)
         {
             var touch = Input.GetTouch(0);
-            var delta = touch.deltaPosition;
-            var distance = delta.x * delta.x + delta.y * delta.y;
-            if (distance >= DetectionDistance)
+
+            switch (touch.phase)
             {
-                CheckGesture(delta * -1);
+            case TouchPhase.Began :
+                /* this is a new touch */
+                isSwipe = true;
+                fingerStartTime = Time.time;
+                _startPos = touch.position;
+                break;
+                     
+            case TouchPhase.Canceled :
+                /* The touch is being canceled */
+                isSwipe = false;
+                break;
+                     
+            case TouchPhase.Ended :
+ 
+                float gestureTime = Time.time - fingerStartTime;
+                float gestureDist = (touch.position - _startPos).magnitude;
+                         
+                if (isSwipe && gestureTime < maxSwipeTime && gestureDist > minSwipeDist){
+                    Vector2 direction = touch.position - _startPos;
+                    Vector2 swipeType = Vector2.zero;
+                         
+                    if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)){
+                        // the swipe is horizontal:
+                        swipeType = Vector2.right * Mathf.Sign(direction.x);
+                    }else{
+                        // the swipe is vertical:
+                        swipeType = Vector2.up * Mathf.Sign(direction.y);
+                    }
+ 
+                    if(swipeType.x != 0.0f){
+                        if(swipeType.x > 0.0f){
+                            // MOVE RIGHT
+                            FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_RIGHT").Value = true;
+                        }else{
+                            // MOVE LEFT
+                            FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_LEFT").Value = true;
+                        }
+                    }
+ 
+                    if(swipeType.y != 0.0f ){
+                        if(swipeType.y > 0.0f){
+                            // MOVE UP
+                            FsmVariables.GlobalVariables.GetFsmBool("JUMP").Value = true;
+                        }else{
+                            // MOVE DOWN
+                        }
+                    }
+ 
+                }
+                         
+                break;
             }
-        }
-        else if (Input.touchCount == 0)
-        {
-            _waitForRelease = false;
         }
 #endif
     }
