@@ -110,12 +110,6 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
-    void OnGUI()
-    {
-        //GUILayout.Label(_debug.ToString());
-        //GUILayout.Label(_debugVector.ToString());
-    }
-
     private void CheckGesture(Vector3 delta)
     {
         _debugVector = delta;
@@ -141,6 +135,7 @@ public class InputManager : MonoBehaviour
             // Swipe bas
             //print("swipe bas");
             _debug += " bas";
+            FsmVariables.GlobalVariables.GetFsmBool("TACLE").Value = true;
         }
         else if (delta.y < 0 && delta.y < -MobileSwipeDetection)
         {

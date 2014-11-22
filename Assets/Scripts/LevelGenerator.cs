@@ -26,6 +26,7 @@ public class LevelGenerator : MonoBehaviour
     private Queue<GameObject> _activeBlocks;
 
     private Hashtable _meshData;
+    private 
 
     #region Comportements Unity
     void Start()
@@ -194,7 +195,7 @@ public class LevelGenerator : MonoBehaviour
     {
         // TODO
         //print("game over");
-        Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("").Value;
+        Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("Score_Total_Int").Value;
         Application.LoadLevel("GameOver");
     }
 }
