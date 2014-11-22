@@ -83,7 +83,7 @@ public class LevelGenerator : MonoBehaviour
         block.transform.parent = transform;
         _activeBlocks.Enqueue(block);
 
-        SpawnPoint += new Vector3(0F, 0F, -6F);
+        SpawnPoint += new Vector3(0F, 0F, 6F);
 
         // Suppression des blocks inutiles
         if (ActiveMeshesCount < _activeBlocks.Count)
