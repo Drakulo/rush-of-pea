@@ -13,6 +13,9 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject SafeBlock;
     public GameObject Coin;
+    public float StartSpeed;
+    public float SpeedIncreaseFactor;
+    public float MaxSpeed;
 
     // Blocks
     public GameObject[] Blocks;
@@ -23,12 +26,19 @@ public class LevelGenerator : MonoBehaviour
     private Queue<GameObject> _activeBlocks;
 
     private Hashtable _meshData;
+    private 
 
     #region Comportements Unity
     void Start()
     {
+
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+
         _meshData = new Hashtable();
-        _meshData.Add("BlockA(Clone)", "ooo");
+        _meshData.Add("D_Sol_01(Clone)", "ooo");
         _meshData.Add("BlockA_01(Clone)", "oxx");
         _meshData.Add("BlockA_02(Clone)", "xxx");
         _meshData.Add("BlockA_03(Clone)", "xoo");
@@ -68,6 +78,13 @@ public class LevelGenerator : MonoBehaviour
         {
             AddLevelBlock();
         }
+
+        // Speed
+        var speed = FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value;
+        speed += SpeedIncreaseFactor * Time.deltaTime;
+        if (speed > MaxSpeed) speed = MaxSpeed; // Clamp
+        //print(speed);
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = speed;
     }
     #endregion
 
@@ -178,7 +195,7 @@ public class LevelGenerator : MonoBehaviour
     {
         // TODO
         //print("game over");
-        Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("").Value;
+        Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("Score_Total_Int").Value;
         Application.LoadLevel("GameOver");
     }
 }
