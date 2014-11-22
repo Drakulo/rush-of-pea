@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using HutongGames.PlayMaker;
 
 public class InputManager : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class InputManager : MonoBehaviour
 
     private float _currentDistance;
 
-    private string _debug;
-    private Vector2 _debugVector;
+    private string _debug = "";
+    private Vector2 _debugVector = Vector2.zero;
 
     void Update()
     {
@@ -75,12 +76,15 @@ public class InputManager : MonoBehaviour
             // Swipe gauche
             print("swipe gauche");
             _debug = "gauche";
+
+            FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_LEFT").Value = true;
         }
         else if (delta.x < 0 && delta.x < MobileSwipeDetection)
         {
             // Swipe droit
             print("swipe droit");
             _debug = "droit";
+            FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_RIGHT").Value = true;
         }
 
         if (delta.y > MobileSwipeDetection)
