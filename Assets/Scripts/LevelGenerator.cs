@@ -85,6 +85,8 @@ public class LevelGenerator : MonoBehaviour
         if (speed > MaxSpeed) speed = MaxSpeed; // Clamp
         //print(speed);
         FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = speed;
+
+        Time.timeScale = speed - StartSpeed + 1;
     }
     #endregion
 
@@ -193,8 +195,7 @@ public class LevelGenerator : MonoBehaviour
     // A appeler par les colliders de pièges et les fosses
     public static void Loose()
     {
-        // TODO
-        //print("game over");
+        Time.timeScale = 1;
         Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("Score_Total_Int").Value;
         Application.LoadLevel("GameOver");
     }
