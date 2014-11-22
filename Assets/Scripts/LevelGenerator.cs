@@ -39,7 +39,7 @@ public class LevelGenerator : MonoBehaviour
         _activeBlocks = new Queue<GameObject>();
 
         // Génération des blocs de base
-        for (var i = 0; i < ActiveMeshesCount; i++ )
+        for (var i = 0; i <= ActiveMeshesCount; i++ )
         {
             AddLevelBlock(SafeBlock);
         }
@@ -116,18 +116,57 @@ public class LevelGenerator : MonoBehaviour
         }
 
         // Check for coin spawn
-        if(specGO != null)
+        if(specGO == null)
         {
             var data = (string) _meshData[block.name];
             if(data.Contains("o"))
             {
                 // On peut spawn des pièces ici
-                var random = Random.Range(0, 3);
-                print(random);
+                var random = Random.Range(0, 2);
+                //print(random);
+                //random = 0;
                 if(random == 0)
                 {
+                    // get the spawn lane
+                    var a = data.Substring(0, 1) == "o";
+                    var b = data.Substring(1, 1) == "o";
+                    var c = data.Substring(2, 1) == "o";
+
+                    var count = 0;
+                    if(a) count++;
+                    if(b) count++;
+                    if(c) count++;
+
+                    var lanes = new int[count];
+                    var index = 0;
+                    if(a)
+                    {
+                        lanes[index] = 1;
+                        index++;
+                    }
+                    if(b)
+                    {
+                        lanes[index] = 0;
+                        index++;
+                    }
+                    if(c)
+                    {
+                        lanes[index] = -1;
+                    }
+
                     // Spawn the coins
-                    print("spawn !!!!");
+                    var pos = block.transform.position;
+                    pos.y += 0.5F;
+                    pos.z -= 1.5F;
+                    pos.x += lanes[Random.Range(0, lanes.Length - 1)];
+                    for (var i = 0; i < 4; i++ )
+                    {
+                        var coin = (GameObject) GameObject.Instantiate(Coin);
+                        coin.transform.parent = block.transform;
+                        coin.transform.position = pos;
+                        pos.z += 1;
+                    }
+                    //print("spawn !!!!");
                 }
             }
         }
@@ -138,8 +177,8 @@ public class LevelGenerator : MonoBehaviour
     public static void Loose()
     {
         // TODO
-        print("game over");
+        //print("game over");
         Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("").Value;
-        //Application.LoadLevel("GameOver");
+        Application.LoadLevel("GameOver");
     }
 }
