@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using HutongGames.PlayMaker;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class LevelGenerator : MonoBehaviour
     #region Comportements Unity
     void Start()
     {
+        // Reset du score
+        Score.GameScore = 0;
+
         _activeBlocks = new Queue<GameObject>();
 
         // Génération des blocs de base
@@ -100,5 +104,7 @@ public class LevelGenerator : MonoBehaviour
     {
         // TODO
         print("game over");
+        Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("").Value;
+        Application.LoadLevel("GameOver");
     }
 }
