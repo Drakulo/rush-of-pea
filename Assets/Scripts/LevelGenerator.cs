@@ -30,10 +30,14 @@ public class LevelGenerator : MonoBehaviour
     #region Comportements Unity
     void Start()
     {
+
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+
         FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
 
         _meshData = new Hashtable();
-        _meshData.Add("BlockA(Clone)", "ooo");
+        _meshData.Add("D_Sol_01(Clone)", "ooo");
         _meshData.Add("BlockA_01(Clone)", "oxx");
         _meshData.Add("BlockA_02(Clone)", "xxx");
         _meshData.Add("BlockA_03(Clone)", "xoo");
@@ -78,7 +82,7 @@ public class LevelGenerator : MonoBehaviour
         var speed = FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value;
         speed += SpeedIncreaseFactor * Time.deltaTime;
         if (speed > MaxSpeed) speed = MaxSpeed; // Clamp
-        print(speed);
+        //print(speed);
         FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = speed;
     }
     #endregion
