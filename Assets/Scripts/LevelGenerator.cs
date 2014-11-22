@@ -13,6 +13,9 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject SafeBlock;
     public GameObject Coin;
+    public float StartSpeed;
+    public float SpeedIncreaseFactor;
+    public float MaxSpeed;
 
     // Blocks
     public GameObject[] Blocks;
@@ -27,6 +30,8 @@ public class LevelGenerator : MonoBehaviour
     #region Comportements Unity
     void Start()
     {
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+
         _meshData = new Hashtable();
         _meshData.Add("BlockA(Clone)", "ooo");
         _meshData.Add("BlockA_01(Clone)", "oxx");
@@ -68,6 +73,13 @@ public class LevelGenerator : MonoBehaviour
         {
             AddLevelBlock();
         }
+
+        // Speed
+        var speed = FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value;
+        speed += SpeedIncreaseFactor * Time.deltaTime;
+        if (speed > MaxSpeed) speed = MaxSpeed; // Clamp
+        print(speed);
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = speed;
     }
     #endregion
 

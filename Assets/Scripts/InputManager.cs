@@ -112,8 +112,8 @@ public class InputManager : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Label(_debug.ToString());
-        GUILayout.Label(_debugVector.ToString());
+        //GUILayout.Label(_debug.ToString());
+        //GUILayout.Label(_debugVector.ToString());
     }
 
     private void CheckGesture(Vector3 delta)
