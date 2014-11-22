@@ -94,4 +94,11 @@ public class LevelGenerator : MonoBehaviour
         }
     }
     #endregion
+
+    // A appeler par les colliders de pièges et les fosses
+    public static void Loose()
+    {
+        // TODO
+        print("game over");
+    }
 }
