@@ -42,8 +42,7 @@ public class InputManager : MonoBehaviour
             _wasTouching = false;
             _waitForRelease = false;
         }
-#endif
-#if UNITY_ANDROID
+#elif UNITY_ANDROID
         if (Input.touchCount > 0 && !_waitForRelease)
         {
             var touch = Input.GetTouch(0);
@@ -79,7 +78,7 @@ public class InputManager : MonoBehaviour
 
             FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_LEFT").Value = true;
         }
-        else if (delta.x < 0 && delta.x < MobileSwipeDetection)
+        else if (delta.x < 0 && delta.x < -MobileSwipeDetection)
         {
             // Swipe droit
             print("swipe droit");
@@ -87,17 +86,18 @@ public class InputManager : MonoBehaviour
             FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_RIGHT").Value = true;
         }
 
-        if (delta.y > MobileSwipeDetection)
+        else if (delta.y > MobileSwipeDetection)
         {
             // Swipe bas
             print("swipe bas");
             _debug += " bas";
         }
-        else if (delta.y < 0 && delta.y < MobileSwipeDetection)
+        else if (delta.y < 0 && delta.y < -MobileSwipeDetection)
         {
             // Swipe haut
             print("swipe haut");
             _debug += " haut";
+            FsmVariables.GlobalVariables.GetFsmBool("JUMP").Value = true;
         }
 
         _waitForRelease = true;
