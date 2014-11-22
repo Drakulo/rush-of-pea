@@ -12,6 +12,7 @@ public class LevelGenerator : MonoBehaviour
     public float SpawnCheckDistance;
 
     public GameObject SafeBlock;
+    public GameObject Coin;
 
     // Blocks
     public GameObject[] Blocks;
@@ -21,11 +22,17 @@ public class LevelGenerator : MonoBehaviour
 
     private Queue<GameObject> _activeBlocks;
 
-    
+    private Hashtable _meshData;
 
     #region Comportements Unity
     void Start()
     {
+        _meshData = new Hashtable();
+        _meshData.Add("BlockA(Clone)", "ooo");
+        _meshData.Add("BlockA_01(Clone)", "oxx");
+        _meshData.Add("BlockA_02(Clone)", "xxx");
+        _meshData.Add("BlockA_03(Clone)", "xoo");
+
         // Reset du score
         Score.GameScore = 0;
 
@@ -106,6 +113,23 @@ public class LevelGenerator : MonoBehaviour
             // On vire la première
             var oldBlock = _activeBlocks.Dequeue();
             Destroy(oldBlock);
+        }
+
+        // Check for coin spawn
+        if(specGO != null)
+        {
+            var data = (string) _meshData[block.name];
+            if(data.Contains("o"))
+            {
+                // On peut spawn des pièces ici
+                var random = Random.Range(0, 3);
+                print(random);
+                if(random == 0)
+                {
+                    // Spawn the coins
+                    print("spawn !!!!");
+                }
+            }
         }
     }
     #endregion
