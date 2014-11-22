@@ -11,6 +11,8 @@ public class LevelGenerator : MonoBehaviour
     // Distance de détection pour le spawn des blocks
     public float SpawnCheckDistance;
 
+    public GameObject SafeBlock;
+
     // Blocks
     public GameObject[] Blocks;
 
@@ -18,6 +20,8 @@ public class LevelGenerator : MonoBehaviour
     public Vector3 SpawnPoint;
 
     private Queue<GameObject> _activeBlocks;
+
+    public 
 
     #region Comportements Unity
     void Start()
@@ -30,7 +34,7 @@ public class LevelGenerator : MonoBehaviour
         // Génération des blocs de base
         for (var i = 0; i < ActiveMeshesCount; i++ )
         {
-            AddLevelBlock();
+            AddLevelBlock(SafeBlock);
         }
 
         //StartCoroutine(DebugSpawnLoop());
@@ -78,12 +82,19 @@ public class LevelGenerator : MonoBehaviour
     /// <summary>
     /// Ajoute un block à la suite du niveua
     /// </summary>
-    private void AddLevelBlock()
+    private void AddLevelBlock(GameObject specGO = null)
     {
         // Block aleatoire
-        var index = Random.Range(0, Blocks.Length);
-
-        var block = (GameObject)GameObject.Instantiate(Blocks[index], SpawnPoint, Quaternion.identity);
+        GameObject block = null;
+        if (specGO)
+        {
+            block = (GameObject)GameObject.Instantiate(specGO, SpawnPoint, Quaternion.identity);
+        }
+        else
+        {
+            var index = Random.Range(0, Blocks.Length);
+            block = (GameObject)GameObject.Instantiate(Blocks[index], SpawnPoint, Quaternion.identity);
+        }
         block.transform.parent = transform;
         _activeBlocks.Enqueue(block);
 
