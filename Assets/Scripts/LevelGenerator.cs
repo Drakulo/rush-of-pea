@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelGenerator : MonoBehaviour
 {
     // Nombre de blovks à générer d'avance
-    public int MeshesToGenerate;
+    public int ActiveMeshesCount;
 
+
+    private Queue<GameObject> _activeBlocks;
 
     #region Comportements Unity
     void Start()
     {
+        _activeBlocks = new Queue<GameObject>();
         StartCoroutine(DebugSpawnLoop());
     }
 
@@ -29,8 +33,7 @@ public class LevelGenerator : MonoBehaviour
         while(true)
         {
             TriggerBlockGeneration();
-            SpawnPoint += new Vector3(1F, 0F, 0F);
-            yield return new WaitForSeconds(0.5F);
+            yield return new WaitForSeconds(0.1F);
         }
     }
     #endregion
@@ -43,11 +46,19 @@ public class LevelGenerator : MonoBehaviour
     private void AddLevelBlock()
     {
         // TODO
-        var spawn = (GameObject)GameObject.Instantiate(DebugSpawn, SpawnPoint, Quaternion.identity);
-        var r = 255F / (float)Random.Range(0, 255);
-        var v = 255F / (float)Random.Range(0, 255);
-        var b = 255F / (float)Random.Range(0, 255);
-        spawn.GetComponent<MeshRenderer>().material.color = new Color(r, v, b);
+        var block = (GameObject)GameObject.Instantiate(DebugSpawn, SpawnPoint, Quaternion.identity);
+        block.transform.parent = transform;
+        _activeBlocks.Enqueue(block);
+
+        SpawnPoint += new Vector3(0F, 0F, 6F);
+
+        // Suppression des blocks inutiles
+        if (ActiveMeshesCount < _activeBlocks.Count)
+        {
+            // On vire la première
+            var oldBlock = _activeBlocks.Dequeue();
+            Destroy(oldBlock);
+        }
     }
     #endregion
 
