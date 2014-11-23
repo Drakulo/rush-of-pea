@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ba92f4aa8cd1934186c60eb805db55f
+guid: 27de0f90a07c49f40931896c490af26e
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,8 +7,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: herbe011
-    4300002: biome_01
+    4300000: sol
     9500000: //RootNode
   materials:
     importMaterials: 1

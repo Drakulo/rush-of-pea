@@ -1,15 +1,29 @@
 fileFormatVersion: 2
-guid: 2ba92f4aa8cd1934186c60eb805db55f
+guid: 1d58d9b99ceb1114bb82593a52711573
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Enemy
+    100004: EYEBROW
+    100006: HEAD
+    100008: MOUTH
+    100010: ROOT
+    100012: Shadows
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: herbe011
-    4300002: biome_01
+    400002: Enemy
+    400004: EYEBROW
+    400006: HEAD
+    400008: MOUTH
+    400010: ROOT
+    400012: Shadows
+    2300000: Shadows
+    3300000: Shadows
+    4300000: Enemy
+    4300002: Shadows
+    7400000: Take 001
     9500000: //RootNode
+    13700000: Enemy
   materials:
     importMaterials: 1
     materialName: 0
