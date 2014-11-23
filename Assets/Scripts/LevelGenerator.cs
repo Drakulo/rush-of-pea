@@ -32,8 +32,7 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
 
-        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
-        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+        FsmVariables.GlobalVariables.GetFsmFloat("Lane").Value = 2;
 
         FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
 
@@ -41,6 +40,7 @@ public class LevelGenerator : MonoBehaviour
         _meshData.Add("D_Sol_01(Clone)", "ooo");
         _meshData.Add("D_block_01(Clone)", "xxx");
         _meshData.Add("D_block_02(Clone)", "xxx");
+        _meshData.Add("D_block_03(Clone)", "xxx");
 
         // Reset du score
         Score.GameScore = 0;
@@ -174,7 +174,7 @@ public class LevelGenerator : MonoBehaviour
 
                     // Spawn the coins
                     var pos = block.transform.position;
-                    pos.y += 0.5F;
+                    pos.y += 1F;
                     pos.z -= 1.5F;
                     pos.x += lanes[Random.Range(0, lanes.Length - 1)];
                     for (var i = 0; i < 4; i++ )

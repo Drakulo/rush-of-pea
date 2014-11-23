@@ -111,10 +111,12 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
+
     void OnGUI()
     {
-        GUILayout.Label(_debugVector.ToString());
+        // GUILayout.Label(_debugVector.ToString());
     }
+
     private void CheckGesture(Vector3 delta)
     {
         _debugVector = delta;
