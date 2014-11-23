@@ -41,6 +41,12 @@ public class LevelGenerator : MonoBehaviour
         _meshData.Add("D_block_01(Clone)", "xxx");
         _meshData.Add("D_block_02(Clone)", "xxx");
         _meshData.Add("D_block_03(Clone)", "xxx");
+        _meshData.Add("D_block_04(Clone)", "xxx");
+        _meshData.Add("D_block_05(Clone)", "xoo");
+        _meshData.Add("D_block_06(Clone)", "xxx");
+        _meshData.Add("D_block_07(Clone)", "oxo");
+        _meshData.Add("D_block_08(Clone)", "xxx");
+        _meshData.Add("D_block_10(Clone)", "0xx");
 
         // Reset du score
         Score.GameScore = 0;
@@ -196,6 +202,12 @@ public class LevelGenerator : MonoBehaviour
     {
         Time.timeScale = 1;
         Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("Score_Total_Int").Value;
+
+        var previousScore = PlayerPrefs.GetInt("HighScore", 0);
+        if (previousScore < Score.GameScore)
+        {
+            PlayerPrefs.SetInt("HighScore", Score.GameScore);
+        }
         Application.LoadLevel("GameOver");
     }
 }
