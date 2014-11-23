@@ -23,36 +23,20 @@ public class InputManager : MonoBehaviour
     private float maxSwipeTime = 0.5f;
     private float minSwipeDist = 50.0f;
 
+    public AudioClip SlideLeft;
+    public AudioClip SlideRight;
     public AudioClip TacleSound;
-    public AudioClip SlideSound;
     public AudioClip[] JumpSounds;
 
     void Update()
     {
-#if UNITY_STANDALONE
-        if(Input.GetMouseButton(0) && !_waitForRelease)
-        {
-            if (!_wasTouching)
-            {
-                // Store start point
-                _startPos = Input.mousePosition;
-                _wasTouching = true;
-            }
-
-            // calcul de la distance parcourue
-            _currentDistance = Vector2.Distance(_startPos, Input.mousePosition);
-            if (_currentDistance >= DetectionDistance)
-            {
-                CheckGesture((Vector3)_startPos - Input.mousePosition);
-            }
-        }
-        else if (!Input.GetMouseButton(0))
-        {
-            _wasTouching = false;
-            _waitForRelease = false;
-        }
+#if UNITY_STANDALONE || UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.Q)) PlaySound(SlideLeft);
+        else if(Input.GetKeyDown(KeyCode.D)) PlaySound(SlideRight);
+        if(Input.GetKeyDown(KeyCode.Space)) PlaySound(JumpSounds[Random.Range(0, JumpSounds.Length)]);
+        if (Input.GetKeyDown(KeyCode.S)) PlaySound(TacleSound);
 #elif UNITY_ANDROID
-        if(Input.touchCount > 0)
+        if (Input.touchCount > 0)
         {
             var touch = Input.GetTouch(0);
 
@@ -91,9 +75,11 @@ public class InputManager : MonoBehaviour
                         if(swipeType.x > 0.0f){
                             // MOVE RIGHT
                             FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_RIGHT").Value = true;
+                            PlaySound(SlideLeft);
                         }else{
                             // MOVE LEFT
                             FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_LEFT").Value = true;
+                            PlaySound(SlideRight);
                         }
                     }
  
@@ -101,9 +87,11 @@ public class InputManager : MonoBehaviour
                         if(swipeType.y > 0.0f){
                             // MOVE UP
                             FsmVariables.GlobalVariables.GetFsmBool("JUMP").Value = true;
+                            PlaySound(JumpSounds[Random.Range(0, JumpSounds.Length)]);
                         }else{
                             // MOVE DOWN
                             FsmVariables.GlobalVariables.GetFsmBool("TACLE").Value = true;
+                            PlaySound(TacleSound);
                         }
                     }
  
@@ -115,12 +103,10 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
-
     void OnGUI()
     {
-        // GUILayout.Label(_debugVector.ToString());
+        GUILayout.Label(_debugVector.ToString());
     }
-
     private void CheckGesture(Vector3 delta)
     {
         _debugVector = delta;
@@ -157,5 +143,10 @@ public class InputManager : MonoBehaviour
         }
 
         _waitForRelease = true;
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        AudioSource.PlayClipAtPoint(clip, Vector3.zero);
     }
 }

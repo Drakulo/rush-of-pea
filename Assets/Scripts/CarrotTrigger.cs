@@ -7,6 +7,9 @@ public class CarrotTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
-        AudioSource.PlayClipAtPoint(Clip, Vector3.zero);
+        if(c.tag == "Player")
+        {
+            AudioSource.PlayClipAtPoint(Clip, Vector3.zero);
+        }
     }
 }

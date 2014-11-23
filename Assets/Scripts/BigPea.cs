@@ -3,30 +3,19 @@ using System.Collections;
 
 public class BigPea : MonoBehaviour
 {
-    public AudioClip RoarSound;
+    public float OscillationSpeed;
+    public float OscillationAmplitude;
 
-    public float MinWaitTime = 2F;
-    public int SoundGap;
-
-    private bool wait = false;
+    private float startY;
+    void Start()
+    {
+        startY = transform.position.y;
+    }
 
     void Update()
     {
-        if (!wait)
-        {
-            var rand = Random.Range(0, 100);
-            if (rand < SoundGap)
-            {
-                AudioSource.PlayClipAtPoint(RoarSound, Vector3.zero);
-                wait = true;
-                StartCoroutine(WaitForNextSound());
-            }
-        }
-    }
-
-    private IEnumerator WaitForNextSound()
-    {
-        yield return new WaitForSeconds(MinWaitTime);
-        wait = false;
+        var pos = transform.position;
+        pos.y = startY + Mathf.Sin(Time.time * OscillationSpeed) * OscillationAmplitude;
+        transform.position = pos;
     }
 }

@@ -11,7 +11,7 @@ public class LevelGenerator : MonoBehaviour
     // Distance de détection pour le spawn des blocks
     public float SpawnCheckDistance;
 
-    public GameObject SafeBlock;
+    public GameObject[] SafeBlocks;
     public GameObject Coin;
     public float StartSpeed;
     public float SpeedIncreaseFactor;
@@ -20,7 +20,6 @@ public class LevelGenerator : MonoBehaviour
     // Blocks
     public GameObject[] Blocks;
 
-    // Deco blocks
     public GameObject[] DecoBlocks;
 
     // Point de spawn actuel
@@ -33,8 +32,8 @@ public class LevelGenerator : MonoBehaviour
     #region Comportements Unity
     void Start()
     {
-
-        FsmVariables.GlobalVariables.GetFsmFloat("Lane").Value = 2;
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
+        FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
 
         FsmVariables.GlobalVariables.GetFsmFloat("SPEED_Forward").Value = StartSpeed;
 
@@ -48,7 +47,24 @@ public class LevelGenerator : MonoBehaviour
         _meshData.Add("D_block_06(Clone)", "xxx");
         _meshData.Add("D_block_07(Clone)", "oxo");
         _meshData.Add("D_block_08(Clone)", "xxx");
+        _meshData.Add("D_block_09(Clone)", "xxx");
         _meshData.Add("D_block_10(Clone)", "0xx");
+        _meshData.Add("D_block_11(Clone)", "xxx");
+        _meshData.Add("D_block_12(Clone)", "xxx");
+        _meshData.Add("D_block_13(Clone)", "ooo");
+        _meshData.Add("D_block_14(Clone)", "oox");
+        _meshData.Add("D_block_15(Clone)", "xoo");
+        _meshData.Add("D_block_16(Clone)", "xxx");
+        _meshData.Add("D_block_17(Clone)", "xoo");
+        _meshData.Add("D_block_18(Clone)", "oxo");
+        _meshData.Add("D_block_19(Clone)", "oox");
+        _meshData.Add("D_block_20(Clone)", "xoo");
+
+        _meshData.Add("D_block_Vide_01(Clone)", "ooo");
+        _meshData.Add("D_block_Vide_02(Clone)", "ooo");
+        _meshData.Add("D_block_Vide_03(Clone)", "ooo");
+        _meshData.Add("D_block_Vide_04(Clone)", "ooo");
+        _meshData.Add("D_block_Vide_05(Clone)", "ooo");
 
         // Reset du score
         Score.GameScore = 0;
@@ -58,7 +74,7 @@ public class LevelGenerator : MonoBehaviour
         // Génération des blocs de base
         for (var i = 0; i <= ActiveMeshesCount; i++ )
         {
-            AddLevelBlock(SafeBlock);
+            AddLevelBlock(SafeBlocks[Random.Range(0, SafeBlocks.Length)]);
         }
 
         //StartCoroutine(DebugSpawnLoop());
@@ -74,7 +90,7 @@ public class LevelGenerator : MonoBehaviour
         origin.z -= SpawnCheckDistance;
         
         //
-        var direction = new Vector3(0, -20, 0);
+        var direction = new Vector3(0, -10, 0);
 
         var ray = new Ray(origin, direction);
 
@@ -130,12 +146,10 @@ public class LevelGenerator : MonoBehaviour
         }
         block.transform.parent = transform;
         _activeBlocks.Enqueue(block);
-        
-        // Add the decot block
-        var rand = Random.Range(0, DecoBlocks.Length - 1);
-        var decoBlock = (GameObject) GameObject.Instantiate(DecoBlocks[rand], SpawnPoint, Quaternion.identity);
-        decoBlock.transform.parent = block.transform;
 
+        // DecoBlock
+        var deco = (GameObject)GameObject.Instantiate(DecoBlocks[Random.Range(0, DecoBlocks.Length)], SpawnPoint, Quaternion.identity);
+        deco.transform.parent = block.transform;
 
         SpawnPoint += new Vector3(0F, 0F, 6F);
 
@@ -151,6 +165,15 @@ public class LevelGenerator : MonoBehaviour
         if(specGO == null)
         {
             var data = (string) _meshData[block.name];
+            try
+            {
+                data.Contains("o");
+            }
+            catch(System.Exception e)
+            {
+                print(block.name);
+            }
+
             if(data.Contains("o"))
             {
                 // On peut spawn des pièces ici
@@ -188,7 +211,7 @@ public class LevelGenerator : MonoBehaviour
 
                     // Spawn the coins
                     var pos = block.transform.position;
-                    pos.y += 1F;
+                    pos.y += 0.5F;
                     pos.z -= 1.5F;
                     pos.x += lanes[Random.Range(0, lanes.Length - 1)];
                     for (var i = 0; i < 4; i++ )
@@ -210,12 +233,6 @@ public class LevelGenerator : MonoBehaviour
     {
         Time.timeScale = 1;
         Score.GameScore = FsmVariables.GlobalVariables.GetFsmInt("Score_Total_Int").Value;
-
-        var previousScore = PlayerPrefs.GetInt("HighScore", 0);
-        if (previousScore < Score.GameScore)
-        {
-            PlayerPrefs.SetInt("HighScore", Score.GameScore);
-        }
-        //Application.LoadLevel("GameOver");
+        Application.LoadLevel("GameOver");
     }
 }
