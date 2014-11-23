@@ -23,6 +23,10 @@ public class InputManager : MonoBehaviour
     private float maxSwipeTime = 0.5f;
     private float minSwipeDist = 50.0f;
 
+    public AudioClip TacleSound;
+    public AudioClip SlideSound;
+    public AudioClip[] JumpSounds;
+
     void Update()
     {
 #if UNITY_STANDALONE

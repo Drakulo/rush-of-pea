@@ -20,13 +20,15 @@ public class LevelGenerator : MonoBehaviour
     // Blocks
     public GameObject[] Blocks;
 
+    // Deco blocks
+    public GameObject[] DecoBlocks;
+
     // Point de spawn actuel
     public Vector3 SpawnPoint;
 
     private Queue<GameObject> _activeBlocks;
 
     private Hashtable _meshData;
-    private 
 
     #region Comportements Unity
     void Start()
@@ -72,7 +74,7 @@ public class LevelGenerator : MonoBehaviour
         origin.z -= SpawnCheckDistance;
         
         //
-        var direction = new Vector3(0, -10, 0);
+        var direction = new Vector3(0, -20, 0);
 
         var ray = new Ray(origin, direction);
 
@@ -128,6 +130,12 @@ public class LevelGenerator : MonoBehaviour
         }
         block.transform.parent = transform;
         _activeBlocks.Enqueue(block);
+        
+        // Add the decot block
+        var rand = Random.Range(0, DecoBlocks.Length - 1);
+        var decoBlock = (GameObject) GameObject.Instantiate(DecoBlocks[rand], SpawnPoint, Quaternion.identity);
+        decoBlock.transform.parent = block.transform;
+
 
         SpawnPoint += new Vector3(0F, 0F, 6F);
 
@@ -208,6 +216,6 @@ public class LevelGenerator : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighScore", Score.GameScore);
         }
-        Application.LoadLevel("GameOver");
+        //Application.LoadLevel("GameOver");
     }
 }
