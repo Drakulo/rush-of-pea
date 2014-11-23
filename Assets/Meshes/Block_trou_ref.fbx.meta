@@ -1,68 +1,30 @@
 fileFormatVersion: 2
-guid: e51303b883fc14b49a75393644f9fb89
+guid: ab5296beb16f2c846ab07f0825aa572d
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
-    100002: banane
-    100004: BlockA
-    100006: bon_sol
-    100008: herbe
-    100010: Lardon1
-    100012: Object003
-    100014: pierre
-    100016: Plane013
-    100018: saucisse_arche
-    100020: saucisse_obstacle
-    100022: saucisse_porte
+    100002: Sol_trou_01
+    100004: Sol_trou_02
+    100006: Sol_trou_03
+    100008: Sol_trou_04
     400000: //RootNode
-    400002: banane
-    400004: BlockA
-    400006: bon_sol
-    400008: herbe
-    400010: Lardon1
-    400012: Object003
-    400014: pierre
-    400016: Plane013
-    400018: saucisse_arche
-    400020: saucisse_obstacle
-    400022: saucisse_porte
-    2300000: //RootNode
-    2300002: banane
-    2300004: BlockA
-    2300006: bon_sol
-    2300008: herbe
-    2300010: Lardon1
-    2300012: Object003
-    2300014: pierre
-    2300016: Plane013
-    2300018: saucisse_arche
-    2300020: saucisse_obstacle
-    2300022: saucisse_porte
-    3300000: //RootNode
-    3300002: banane
-    3300004: BlockA
-    3300006: bon_sol
-    3300008: herbe
-    3300010: Lardon1
-    3300012: Object003
-    3300014: pierre
-    3300016: Plane013
-    3300018: saucisse_arche
-    3300020: saucisse_obstacle
-    3300022: saucisse_porte
-    4300000: BlockA
-    4300002: saucisse_porte
-    4300004: saucisse_arche
-    4300006: saucisse_obstacle
-    4300008: banane
-    4300010: Lardon1
-    4300012: Plane013
-    4300014: Object003
-    4300016: pierre
-    4300018: herbe
-    4300020: bon_sol
-    7400000: Take 001
+    400002: Sol_trou_01
+    400004: Sol_trou_02
+    400006: Sol_trou_03
+    400008: Sol_trou_04
+    2300000: Sol_trou_01
+    2300002: Sol_trou_02
+    2300004: Sol_trou_03
+    2300006: Sol_trou_04
+    3300000: Sol_trou_01
+    3300002: Sol_trou_02
+    3300004: Sol_trou_03
+    3300006: Sol_trou_04
+    4300000: Sol_trou_01
+    4300002: Sol_trou_02
+    4300004: Sol_trou_03
+    4300006: Sol_trou_04
     9500000: //RootNode
   materials:
     importMaterials: 1

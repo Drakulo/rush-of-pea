@@ -39,9 +39,7 @@ public class LevelGenerator : MonoBehaviour
 
         _meshData = new Hashtable();
         _meshData.Add("D_Sol_01(Clone)", "ooo");
-        _meshData.Add("BlockA_01(Clone)", "oxx");
-        _meshData.Add("BlockA_02(Clone)", "xxx");
-        _meshData.Add("BlockA_03(Clone)", "xoo");
+        _meshData.Add("D_block_01(Clone)", "xxx");
 
         // Reset du score
         Score.GameScore = 0;

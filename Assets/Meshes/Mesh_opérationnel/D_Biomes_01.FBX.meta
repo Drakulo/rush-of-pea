@@ -25,6 +25,28 @@ ModelImporter:
     100038: Plane011
     100040: Plane012
     100042: saucisse_obstacle
+    100044: ail001
+    100046: banane001
+    100048: BlockA
+    100050: bon_sol
+    100052: herbe005
+    100054: herbe006
+    100056: herbe007
+    100058: herbe008
+    100060: herbe009
+    100062: herbe010
+    100064: herbe011
+    100066: Lardon002
+    100068: Object004
+    100070: Object006
+    100072: Object007
+    100074: Object008
+    100076: pierre001
+    100078: pierre002
+    100080: Plane014
+    100082: saucisse_arche001
+    100084: saucisse_obstacle001
+    100086: saucisse_porte001
     400000: banane
     400002: Box001
     400004: Box002
@@ -47,6 +69,28 @@ ModelImporter:
     400038: Plane011
     400040: Plane012
     400042: saucisse_obstacle
+    400044: ail001
+    400046: banane001
+    400048: BlockA
+    400050: bon_sol
+    400052: herbe005
+    400054: herbe006
+    400056: herbe007
+    400058: herbe008
+    400060: herbe009
+    400062: herbe010
+    400064: herbe011
+    400066: Lardon002
+    400068: Object004
+    400070: Object006
+    400072: Object007
+    400074: Object008
+    400076: pierre001
+    400078: pierre002
+    400080: Plane014
+    400082: saucisse_arche001
+    400084: saucisse_obstacle001
+    400086: saucisse_porte001
     2300000: banane
     2300002: Box001
     2300004: Box002
@@ -67,6 +111,27 @@ ModelImporter:
     2300034: Plane011
     2300036: Plane012
     2300038: saucisse_obstacle
+    2300040: ail001
+    2300042: banane001
+    2300044: BlockA
+    2300046: bon_sol
+    2300048: herbe005
+    2300050: herbe006
+    2300052: herbe007
+    2300054: herbe008
+    2300056: herbe009
+    2300058: herbe010
+    2300060: herbe011
+    2300062: Lardon002
+    2300064: Object004
+    2300066: Object006
+    2300068: Object007
+    2300070: Object008
+    2300072: pierre001
+    2300074: pierre002
+    2300076: saucisse_arche001
+    2300078: saucisse_obstacle001
+    2300080: saucisse_porte001
     3300000: banane
     3300002: Box001
     3300004: Box002
@@ -87,6 +152,27 @@ ModelImporter:
     3300034: Plane011
     3300036: Plane012
     3300038: saucisse_obstacle
+    3300040: ail001
+    3300042: banane001
+    3300044: BlockA
+    3300046: bon_sol
+    3300048: herbe005
+    3300050: herbe006
+    3300052: herbe007
+    3300054: herbe008
+    3300056: herbe009
+    3300058: herbe010
+    3300060: herbe011
+    3300062: Lardon002
+    3300064: Object004
+    3300066: Object006
+    3300068: Object007
+    3300070: Object008
+    3300072: pierre001
+    3300074: pierre002
+    3300076: saucisse_arche001
+    3300078: saucisse_obstacle001
+    3300080: saucisse_porte001
     4300000: fraise
     4300002: saucisse_obstacle
     4300004: banane
@@ -107,6 +193,28 @@ ModelImporter:
     4300034: Box009
     4300036: Box010
     4300038: Box011
+    4300040: BlockA
+    4300042: bon_sol
+    4300044: saucisse_porte001
+    4300046: saucisse_arche001
+    4300048: saucisse_obstacle001
+    4300050: banane001
+    4300052: Lardon002
+    4300054: Object004
+    4300056: pierre001
+    4300058: ail001
+    4300060: Object006
+    4300062: Object007
+    4300064: Object008
+    4300066: pierre002
+    4300068: herbe005
+    4300070: herbe006
+    4300072: herbe007
+    4300074: herbe008
+    4300076: herbe009
+    4300078: herbe010
+    4300080: herbe011
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
