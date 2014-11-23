@@ -99,6 +99,7 @@ public class InputManager : MonoBehaviour
                             FsmVariables.GlobalVariables.GetFsmBool("JUMP").Value = true;
                         }else{
                             // MOVE DOWN
+                            FsmVariables.GlobalVariables.GetFsmBool("TACLE").Value = true;
                         }
                     }
  
@@ -112,10 +113,8 @@ public class InputManager : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Label(_debug.ToString());
         GUILayout.Label(_debugVector.ToString());
     }
-
     private void CheckGesture(Vector3 delta)
     {
         _debugVector = delta;
@@ -123,7 +122,7 @@ public class InputManager : MonoBehaviour
         if (delta.x > MobileSwipeDetection)
         {
             // Swipe gauche
-            print("swipe gauche");
+            //print("swipe gauche");
             _debug = "gauche";
 
             FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_LEFT").Value = true;
@@ -131,7 +130,7 @@ public class InputManager : MonoBehaviour
         else if (delta.x < 0 && delta.x < -MobileSwipeDetection)
         {
             // Swipe droit
-            print("swipe droit");
+            //print("swipe droit");
             _debug = "droit";
             FsmVariables.GlobalVariables.GetFsmBool("Strafe_To_RIGHT").Value = true;
         }
@@ -139,13 +138,14 @@ public class InputManager : MonoBehaviour
         else if (delta.y > MobileSwipeDetection)
         {
             // Swipe bas
-            print("swipe bas");
+            //print("swipe bas");
             _debug += " bas";
+            FsmVariables.GlobalVariables.GetFsmBool("TACLE").Value = true;
         }
         else if (delta.y < 0 && delta.y < -MobileSwipeDetection)
         {
             // Swipe haut
-            print("swipe haut");
+            //print("swipe haut");
             _debug += " haut";
             FsmVariables.GlobalVariables.GetFsmBool("JUMP").Value = true;
         }

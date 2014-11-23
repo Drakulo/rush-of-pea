@@ -5,6 +5,9 @@ public class LooseCollider : MonoBehaviour
 {
     void OnTriggerEnter(Collider c)
     {
-        LevelGenerator.Loose();
+        if(c.tag == "Player")
+        {
+            LevelGenerator.Loose();
+        }
     }
 }
